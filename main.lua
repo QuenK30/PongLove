@@ -35,13 +35,13 @@ function love.update(dt) -- Début de la fonction de mise à jour (dt = delta ti
   
   -- Déplacement de la raquette du joueur 1
   if love.keyboard.isDown("z") then
-    player1.y = player1.y - 400 * dt
+    player1.y = player1.y - 400 * dt -- 400 = vitesse de déplacement de la raquette
   elseif love.keyboard.isDown("s") then
     player1.y = player1.y + 400 * dt
   end
   
   -- Déplacement de la raquette du joueur 2
-  if love.keyboard.isDown("up") then
+  if love.keyboard.isDown("up") then -- "up" = flèche du haut
     player2.y = player2.y - 400 * dt
   elseif love.keyboard.isDown("down") then
     player2.y = player2.y + 400 * dt
@@ -53,10 +53,10 @@ function love.update(dt) -- Début de la fonction de mise à jour (dt = delta ti
   end
   
   -- Collision avec le haut et le bas de l'écran
-  if ball.y < ball.radius then
+  if ball.y < ball.radius then -- Si la balle touche le haut de l'écran
     ball.y = ball.radius
     ball.dy = -ball.dy
-  elseif ball.y > 600 - ball.radius then
+  elseif ball.y > 600 - ball.radius then -- Si la balle touche le bas de l'écran
     ball.y = 600 - ball.radius
     ball.dy = -ball.dy
   end
