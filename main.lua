@@ -1,3 +1,4 @@
+---@diagnostic disable: duplicate-set-field
 --[[
   Project: PongLove - Pong clone in Lua using LÖVE
   Date: 10-02-2023
@@ -18,6 +19,13 @@ function love.load() -- Début de la fonction d'initialisation
   player1 = {x = 50, y = 250, width = 10, height = 100, score = 0} -- x = abscisse, y = ordonnée, width = largeur, height = hauteur, score = score
   player2 = {x = 750, y = 250, width = 10, height = 100, score = 0}
 
+  -- Allez plus loin (optionnel) (choisir la direction aléatoirement au début du jeu)
+  local startDirection = math.random(2) -- math.random(2) = nombre aléatoire entre 1 et 2
+  if startDirection == 1 then -- Si startDirection = 1
+    print("La balle va vers la droite") -- Afficher "La balle va vers la droite"
+    ball.dx = -ball.dx -- ball.dx = -1
+  end
+  print("La balle va vers la gauche") -- Afficher "La balle va vers la gauche"
   -- Nom de la fenêtre
   love.window.setTitle("Pong UnisCité")
 end -- Fin de la fonction d'initialisation
@@ -45,11 +53,6 @@ function love.update(dt) -- Début de la fonction de mise à jour (dt = delta ti
     player2.y = player2.y - 400 * dt
   elseif love.keyboard.isDown("down") then
     player2.y = player2.y + 400 * dt
-  end
-
-  -- Enteindre le programme si echap appuyé
-  if love.keyboard.isDown("escape") then
-    love.event.quit()
   end
   
   -- Collision avec le haut et le bas de l'écran
@@ -99,7 +102,19 @@ function love.draw() -- Début de la fonction d'affichage
   love.graphics.rectangle("fill", player2.x, player2.y, player2.width, player2.height)
   
   -- Affichage du score
-  love.graphics.print("Score: "..player1.score.." | "..player2.score, 350, 20)
+  --love.graphics.setColor(0, 255, 0) -- Couleur du texte (255, 255, 255) = blanc (0, 0, 0) = noir (255, 0, 0) = rouge (0, 255, 0) = vert (0, 0, 255) = bleu
+  love.graphics.printf("Score: "..player1.score.." | "..player2.score, 350, 20, 100, "left") -- Affichage du score (.. = concaténation
 end -- Fin de la fonction d'affichage
 
+--[[
+  Mise en place de la fonction de pression de touche
+(pression de touche: En informatique, la pression de touche est l'opération qui consiste à appuyer sur une touche d'un clavier.)
+Pour notre cas: La pression de touche est l'opération qui consiste à appuyer sur une touche du clavier pour quitter le jeu. (escape = touche échap)
+]]--
+
+function love.keypressed(key)
+  if key == "escape" then
+    love.event.quit()
+  end
+end
 -- Fin du code
