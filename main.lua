@@ -20,6 +20,8 @@ function love.load() -- Début de la fonction d'initialisation
   player2 = {x = 750, y = 250, width = 10, height = 100, score = 0}
 
   -- Allez plus loin (optionnel) (choisir la direction aléatoirement au début du jeu)
+    -- Initialisation de la seed aléatoire
+    math.randomseed(os.time())
   local startDirection = math.random(2) -- math.random(2) = nombre aléatoire entre 1 et 2
   if startDirection == 1 then -- Si startDirection = 1
     print("La balle va vers la droite") -- Afficher "La balle va vers la droite"
