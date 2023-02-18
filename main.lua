@@ -70,9 +70,13 @@ function love.update(dt) -- Début de la fonction de mise à jour (dt = delta ti
   if ball.x < player1.x + player1.width and ball.y > player1.y and ball.y < player1.y + player1.height then -- Si la balle touche la raquette du joueur 1
     ball.x = player1.x + player1.width
     ball.dx = -ball.dx
+    -- Allez plus loin (optionnel) (augmenter la vitesse de la balle à chaque fois qu'elle touche une raquette)
+      ball.speed = ball.speed + 50
   elseif ball.x > player2.x - player2.width and ball.y > player2.y and ball.y < player2.y + player2.height then -- Si la balle touche la raquette du joueur 2
     ball.x = player2.x - player2.width
     ball.dx = -ball.dx
+    -- Allez plus loin (optionnel) (augmenter la vitesse de la balle à chaque fois qu'elle touche une raquette)
+      ball.speed = ball.speed + 50
   end
   
   -- Collision avec les bords de l'écran (x = abscisse, y = ordonnée et dx = déplacement en x)
@@ -81,11 +85,15 @@ function love.update(dt) -- Début de la fonction de mise à jour (dt = delta ti
     ball.x = 400
     ball.y = 300
     ball.dx = -ball.dx
+    -- Allez plus loin (optionnel) (remettre la vitesse de la balle à sa valeur de départ à chaque fois qu'elle touche un bord de l'écran)
+      ball.speed = 200
   elseif ball.x > 800 then -- Si la balle touche le bord droit de l'écran
     player1.score = player1.score + 1
     ball.x = 400
     ball.y = 300
     ball.dx = -ball.dx
+    -- Allez plus loin (optionnel) (remettre la vitesse de la balle à sa valeur de départ à chaque fois qu'elle touche un bord de l'écran)
+      ball.speed = 200
   end
 end -- Fin de la fonction de mise à jour
 
